@@ -2,11 +2,12 @@
  *
  * Requirements:
  * ==============================
- * 1. Users are able to register an account by providing name, photoURL, email, and password using firebase.
- * 2.[Bonus] Add validation in the registration form.
+ * [Done] 1. Users are able to register an account by providing name, photoURL, email, and password using firebase.
+ * [Done] 2. [Bonus] Add validation in the registration form.
+ * 3. [Bonus] Upon login, you will create a jwt token and store it on the client-side and you will send the token with the call and verify the user. Implementing 401 and 403 is optional. Ensure you have implemented jwt token and create a token and store it on the client-side for both email/password-based authentication and social login. You must implement JWT on your private routes.
  */
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PageHeader from "../Layouts/PageHeader";
 import SocialLogin from "../Components/SocialLogin";
 import { useState } from "react";
@@ -15,6 +16,7 @@ import Swal from "sweetalert2";
 
 const Register = () => {
   const { createUser, updateUser } = useAuth();
+  const navigate = useNavigate();
 
   const [displayName, setDisplayName] = useState("");
   const [photoURL, setPhotoURL] = useState("");
@@ -86,7 +88,7 @@ const Register = () => {
           showCloseButton: true,
         });
 
-        // navigate("/profile");
+        navigate("/");
       } catch (error) {
         console.error(error);
       }
@@ -105,7 +107,7 @@ const Register = () => {
             />
           </div>
           <div className="flex-1 text-center px-12 py-16 bg-gray-100 rounded-lg">
-            <div className="space-y-8">
+            <div className="space-y-8 max-w-sm mx-auto">
               <h3 className="text-2xl font-semibold">Create an account</h3>
               <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
                 <div className="form-group">
