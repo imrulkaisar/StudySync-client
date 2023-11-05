@@ -1,3 +1,10 @@
+/**
+ *
+ * Requirements:
+ * ==============================
+ * 1.[Bonus] Add validation in the registration form.
+ */
+
 const Register = () => {
   return (
     <div>
