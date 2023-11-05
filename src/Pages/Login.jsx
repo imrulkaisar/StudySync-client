@@ -8,7 +8,7 @@
 
  */
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import PageHeader from "../Layouts/PageHeader";
 import SocialLogin from "../Components/SocialLogin";
 import { useState } from "react";
@@ -18,6 +18,10 @@ import Swal from "sweetalert2";
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const state = location.state || {};
+  const { pathname = "/", search = "" } = state;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,7 +41,7 @@ const Login = () => {
         });
       }
 
-      navigate("/");
+      navigate(pathname + search);
     } catch (error) {
       console.error(error);
 

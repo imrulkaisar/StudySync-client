@@ -2,11 +2,15 @@ import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
   const { googleLogin, githubLogin } = useAuth();
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const state = location.state || {};
+  const { pathname = "/", search = "" } = state;
 
   const socialLogin = (media) => {
     media()
@@ -20,7 +24,7 @@ const SocialLogin = () => {
           });
         }
 
-        navigate("/");
+        navigate(pathname + search);
       })
       .catch((error) => {
         console.error(error);

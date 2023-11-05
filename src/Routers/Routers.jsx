@@ -11,6 +11,7 @@ import HowItWorks from "../Pages/HowItWorks";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import NotFound from "../Pages/NotFound";
+import PrivateRouter from "./PrivateRouter";
 
 const Routers = createBrowserRouter([
   {
@@ -27,23 +28,43 @@ const Routers = createBrowserRouter([
       },
       {
         path: "/assignment/:id",
-        element: <AssignmentDetails />,
+        element: (
+          <PrivateRouter>
+            <AssignmentDetails />
+          </PrivateRouter>
+        ),
       },
       {
         path: "/create-assignment",
-        element: <CreateAssignment />,
+        element: (
+          <PrivateRouter>
+            <CreateAssignment />
+          </PrivateRouter>
+        ),
       },
       {
         path: "/update-assignment/:id",
-        element: <UpdateAssignment />,
+        element: (
+          <PrivateRouter>
+            <UpdateAssignment />
+          </PrivateRouter>
+        ),
       },
       {
         path: "/submitted-assignments",
-        element: <SubmittedAssignments />,
+        element: (
+          <PrivateRouter>
+            <SubmittedAssignments />
+          </PrivateRouter>
+        ),
       },
       {
         path: "my-assignments",
-        element: <MyAssignments />,
+        element: (
+          <PrivateRouter>
+            <MyAssignments />
+          </PrivateRouter>
+        ),
       },
       {
         path: "/how-it-works",
