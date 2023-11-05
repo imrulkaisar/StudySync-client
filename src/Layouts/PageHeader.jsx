@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const PageHeader = ({ title, description }) => {
   return (
-    <section className="bg-white">
+    <section className="bg-white py-0">
       <div className="container-area py-10 border-b flex flex-col lg:flex-row justify-between gap-3 lg:gap-10 items-center">
         <div className="space-y-3">
           <h2 className="text-3xl font-semibold text-center lg:text-left">

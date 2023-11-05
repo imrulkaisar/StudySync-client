@@ -8,6 +8,8 @@ export default {
         primaryShadow: "#398FFD",
         secondary: "#5240FF",
         secondaryShadow: "#7858F9",
+        darkOverlay: "rgba(0,0,0,0.7)",
+        lightOverlay: "rgba(0,0,0,0.4)",
       },
       fontFamily: {
         primary: "'Poppins', sans-serif",

@@ -10,6 +10,13 @@
   p {
     @apply text-base text-gray-600 font-secondary;
   }
+  img {
+    @apply max-w-full;
+  }
+
+  section {
+    @apply py-16;
+  }
 }
 
 @layer components {
@@ -33,6 +40,9 @@
   }
   .form-input {
     @apply bg-white px-5 py-3 border border-gray-300 rounded-md focus:outline-none;
+  }
+  .section-title {
+    @apply text-4xl font-semibold;
   }
 }
 
