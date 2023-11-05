@@ -1,3 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-primary;
+  }
+}
+
+@layer components {
+  .container-area {
+    @apply max-w-6xl mx-auto px-5 xl:px-0 2xl:max-w-7xl;
+  }
+  .gradient-bg {
+    @apply bg-gradient-to-r from-secondary to-primary;
+  }
+  .btn {
+    @apply uppercase py-2 px-7 rounded-md tracking-wider font-medium;
+  }
+  .btn-primary {
+    @apply gradient-bg bg-gradient-to-br text-white;
+  }
+  .btn-primary:hover {
+    @apply gradient-bg bg-gradient-to-tl;
+  }
+}
+
+#main-menu .active {
+  @apply text-secondary;
+}

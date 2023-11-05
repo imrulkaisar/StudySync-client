@@ -12,7 +12,7 @@
 const Home = () => {
   return (
     <div>
-      <h2>Home</h2>
+      <section className="min-h-[500px] bg-[url('https://tinyurl.com/5bs47dx4')] bg-center bg-cover"></section>
     </div>
   );
 };
