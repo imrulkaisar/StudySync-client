@@ -6,7 +6,7 @@
  *
  */
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../Components/Logo";
 import NavItems from "../Components/NavItems";
 import { BsPlusCircleDotted } from "react-icons/bs";
@@ -16,12 +16,29 @@ import Drawer from "react-modern-drawer";
 
 //import styles 👇
 import "react-modern-drawer/dist/index.css";
+import useAuth from "../Hooks/useAuth";
 
 const Header = () => {
+  const { user, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
+  };
+
+  const handleLogOut = () => {
+    logout()
+      .then((res) => {
+        console.log(res);
+        if (res) {
+          console.log("Logged out.");
+          navigate("/login");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -42,11 +59,34 @@ const Header = () => {
             >
               <BsPlusCircleDotted /> <span>Add assignment</span>
             </Link>
-            <Link className="btn btn-primary" to="/login">
-              Login
-            </Link>
+            {!user ? (
+              <Link className="btn btn-primary" to="/login">
+                Login
+              </Link>
+            ) : (
+              <div className="group flex gap-3 items-end">
+                <img
+                  className="w-10 aspect-square object-cover rounded-full border-2 p-[2px]"
+                  src={user.photoURL}
+                  alt=""
+                />
+                <div className="">
+                  <p className="text-black capitalize text-sm">
+                    {user.displayName}
+                  </p>
+                  <button
+                    onClick={handleLogOut}
+                    className="py-1 px-4 border text-xs leading-none border-gray-400 group-hover:text-white group-hover:bg-gray-900 group-hover:border-gray-900 group-hover:rounded-md"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
+
+        {/* mobile menu */}
         <div className="mobile-menu flex lg:hidden justify-between gap-4 items-center">
           <Logo className="text-3xl" logoClass="w-5" />
           <div className="flex gap-4 items-center">
@@ -67,7 +107,27 @@ const Header = () => {
                 direction="right"
                 className="bla bla bla"
               >
-                <div className="px-5 py-8 bg-gray-300 min-h-screen flex flex-col gap-8 items-center">
+                <div className="px-5 py-8 bg-gray-100 min-h-screen flex flex-col gap-8 items-center">
+                  {user && (
+                    <div className="group flex gap-3 items-end">
+                      <img
+                        className="w-10 aspect-square object-cover rounded-full border-2 p-[2px]"
+                        src={user.photoURL}
+                        alt=""
+                      />
+                      <div className="">
+                        <p className="text-black capitalize text-sm">
+                          {user.displayName}
+                        </p>
+                        <button
+                          onClick={handleLogOut}
+                          className="py-1 px-4 border text-xs leading-none border-gray-400 group-hover:text-white group-hover:bg-gray-900 group-hover:border-gray-900 group-hover:rounded-md"
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    </div>
+                  )}
                   <Link
                     to="/create-assignment"
                     className="flex gap-2 items-center capitalize border-b border-gray-500 py-1 text-sm"

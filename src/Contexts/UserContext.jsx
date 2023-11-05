@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { createContext } from "react";
 import auth from "../Authentication/firebase.config";
 import {
+  GithubAuthProvider,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -45,6 +46,12 @@ const UserContextProvider = ({ children }) => {
     const provider = new GoogleAuthProvider();
     return signInWithPopup(auth, provider);
   };
+  // login with github
+  const githubLogin = () => {
+    setLoading(true);
+    const provider = new GithubAuthProvider();
+    return signInWithPopup(auth, provider);
+  };
 
   // update user
   const updateUser = (userData) => {
@@ -73,13 +80,14 @@ const UserContextProvider = ({ children }) => {
     createUser,
     login,
     googleLogin,
+    githubLogin,
     updateUser,
     logout,
   };
 
   console.log(
     "UserContext: ",
-    "{user, loading, createUser, login, googleLogin, updateUser, logout}"
+    "{user, loading, createUser, login, googleLogin, githubLogin, updateUser, logout}"
   );
 
   return (
