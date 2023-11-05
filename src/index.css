@@ -7,6 +7,9 @@
   body {
     @apply font-primary;
   }
+  p {
+    @apply text-base text-gray-600 font-secondary;
+  }
 }
 
 @layer components {
@@ -24,6 +27,12 @@
   }
   .btn-primary:hover {
     @apply gradient-bg bg-gradient-to-tl;
+  }
+  .form-group {
+    @apply flex flex-col gap-2 text-left;
+  }
+  .form-input {
+    @apply bg-white px-5 py-3 border border-gray-300 rounded-md focus:outline-none;
   }
 }
 
