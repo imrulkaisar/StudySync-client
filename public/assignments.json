@@ -1,0 +1,182 @@
+[
+  {
+      "id": 1,
+      "title": "Basic HTML Page",
+      "description": "Create a basic HTML page with necessary tags such as <html>, <head>, and <body>. Add relevant content including headings, paragraphs, and lists. Insert an image using the <img> tag and create a simple form with input fields and a submit button. Add appropriate attributes to each element for better accessibility and user interaction.",
+      "marks": 50,
+      "thumbnail": "https://example.com/html_thumbnail.jpg",
+      "difficultyLevel": "easy",
+      "dueDate": "2023-11-10"
+  },
+  {
+      "id": 2,
+      "title": "CSS Styling",
+      "description": "Apply CSS to the HTML page created in the previous assignment. Use selectors to target specific elements and apply styles such as colors, fonts, and layouts. Create a responsive design using media queries to ensure the website layout adjusts to different screen sizes. Experiment with different CSS properties to enhance the visual appeal of the webpage.",
+      "marks": 60,
+      "thumbnail": "https://example.com/css_thumbnail.jpg",
+      "difficultyLevel": "medium",
+      "dueDate": "2023-11-11"
+  },
+  {
+      "id": 3,
+      "title": "JavaScript Calculator",
+      "description": "Build a simple calculator using JavaScript. Create functions for addition, subtraction, multiplication, and division. Implement a user interface that allows users to input numbers and perform calculations. Display the result accurately on the screen and handle edge cases such as division by zero and invalid inputs. Test the calculator thoroughly to ensure its functionality and accuracy.",
+      "marks": 70,
+      "thumbnail": "https://example.com/js_thumbnail.jpg",
+      "difficultyLevel": "medium",
+      "dueDate": "2023-11-12"
+  },
+  {
+      "id": 4,
+      "title": "Responsive Web Design",
+      "description": "Design a responsive website layout using HTML and CSS. Create a navigation bar, header, content sections, and footer. Implement a grid-based layout using CSS frameworks or custom media queries. Optimize the design for different screen sizes and devices. Test the website on various browsers and devices to ensure consistent functionality and appearance.",
+      "marks": 80,
+      "thumbnail": "https://example.com/responsive_thumbnail.jpg",
+      "difficultyLevel": "hard",
+      "dueDate": "2023-11-13"
+  },
+  {
+      "id": 5,
+      "title": "Simple Python Program",
+      "description": "Write a simple Python program that performs basic operations such as addition, subtraction, multiplication, and division. Implement error handling to manage exceptions and input validation. Use appropriate data structures and control structures to organize the code effectively. Test the program with different inputs to ensure its reliability and accuracy.",
+      "marks": 90,
+      "thumbnail": "https://example.com/python_thumbnail.jpg",
+      "difficultyLevel": "easy",
+      "dueDate": "2023-11-14"
+  },
+  {
+      "id": 6,
+      "title": "Database Management System",
+      "description": "Design a small database management system using SQL. Create tables for storing different types of data and establish appropriate relationships between tables. Implement SQL queries for data retrieval, insertion, and deletion. Optimize the database structure for efficient data management and query performance. Test the database system with various scenarios to ensure its functionality and data integrity.",
+      "marks": 100,
+      "thumbnail": "https://example.com/database_thumbnail.jpg",
+      "difficultyLevel": "hard",
+      "dueDate": "2023-11-15"
+  },
+  {
+      "id": 7,
+      "title": "Object-Oriented Programming in Java",
+      "description": "Implement a Java program using object-oriented principles. Create classes with appropriate attributes and methods, and establish inheritance and polymorphism relationships between classes. Implement exception handling and encapsulation to ensure data security and code reliability. Test the program with different test cases to validate its functionality and robustness.",
+      "marks": 80,
+      "thumbnail": "https://example.com/java_thumbnail.jpg",
+      "difficultyLevel": "medium",
+      "dueDate": "2023-11-16"
+  },
+  {
+      "id": 8,
+      "title": "Data Structures and Algorithms",
+      "description": "Implement various data structures such as arrays, linked lists, stacks, and queues in a programming language of your choice. Demonstrate the usage of these data structures with appropriate algorithms for sorting, searching, and manipulation. Analyze the time and space complexities of the algorithms used and compare their performance under different input scenarios.",
+      "marks": 90,
+      "thumbnail": "https://example.com/dsa_thumbnail.jpg",
+      "difficultyLevel": "hard",
+      "dueDate": "2023-11-17"
+  },
+  {
+      "id": 9,
+      "title": "PHP Web Development",
+      "description": "Build a dynamic website using PHP. Implement server-side scripting to create dynamic web pages and interact with a database. Use PHP frameworks or libraries for efficient code management and security. Apply best practices for handling user inputs and data, and implement data validation and sanitization techniques. Test the website thoroughly to ensure its functionality and security.",
+      "marks": 70,
+      "thumbnail": "https://example.com/php_thumbnail.jpg",
+      "difficultyLevel": "medium",
+      "dueDate": "2023-11-18"
+  },
+  {
+      "id": 10,
+      "title": "Introduction to C Programming",
+      "description": "Write a simple C program that demonstrates basic concepts such as variables, loops, conditional statements, and functions. Implement error handling and memory management techniques to ensure the program's stability and efficiency. Follow C programming standards and coding conventions to maintain code readability and understandability.",
+      "marks": 60,
+      "thumbnail": "https://example.com/c_thumbnail.jpg",
+      "difficultyLevel": "easy",
+      "dueDate": "2023-11-19"
+  },
+  {
+      "id": 11,
+      "title": "User Interface Design",
+      "description": "Design a user-friendly interface for a mobile application or a website. Create wireframes and prototypes to visualize the layout and user interactions. Incorporate principles of usability and accessibility to enhance the user experience. Conduct user testing to gather feedback and iterate on the design to improve its functionality and user satisfaction.",
+      "marks": 80,
+      "thumbnail": "https://example.com/ui_thumbnail.jpg",
+      "difficultyLevel": "medium",
+      "dueDate": "2023-11-20"
+  },
+  {
+      "id": 12,
+      "title": "Advanced JavaScript Concepts",
+      "description": "Explore advanced JavaScript concepts such as closures, asynchronous programming, and higher-order functions. Implement complex algorithms and data structures using JavaScript. Apply modern JavaScript features and best practices to optimize code performance and readability. Test the JavaScript code with different use cases to ensure its efficiency and reliability.",
+      "marks": 90,
+      "thumbnail": "https://example.com/adv_js_thumbnail.jpg",
+      "difficultyLevel": "hard",
+      "dueDate": "2023-11-21"
+  },
+  {
+      "id": 13,
+      "title": "Mobile App Development",
+      "description": "Develop a simple mobile application for Android or iOS using appropriate development tools and languages. Implement key features such as user authentication, data storage, and interactive user interfaces. Test the application on real devices and emulators to ensure its functionality and compatibility. Optimize the application for performance and user experience.",
+      "marks": 70,
+      "thumbnail": "https://example.com/mobile_app_thumbnail.jpg",
+      "difficultyLevel": "medium",
+      "dueDate": "2023-11-22"
+  },
+  {
+      "id": 14,
+      "title": "Network Security",
+      "description": "Design a network security system to protect against various cyber threats and attacks. Implement encryption protocols, firewalls, and intrusion detection systems to safeguard the network infrastructure. Conduct vulnerability assessments and penetration testing to identify potential weaknesses and security loopholes. Analyze security logs and implement measures for continuous monitoring and threat detection.",
+      "marks": 90,
+      "thumbnail": "https://example.com/network_security_thumbnail.jpg",
+      "difficultyLevel": "hard",
+      "dueDate": "2023-11-23"
+  },
+  {
+      "id": 15,
+      "title": "Software Testing and Quality Assurance",
+      "description": "Develop a comprehensive software testing plan for a given application. Implement various testing techniques such as unit testing, integration testing, and system testing to ensure the software's functionality and reliability. Execute test cases and analyze test results to identify and resolve software defects. Implement quality assurance measures to maintain high software standards and customer satisfaction.",
+      "marks": 80,
+      "thumbnail": "https://example.com/testing_thumbnail.jpg",
+      "difficultyLevel": "medium",
+      "dueDate": "2023-11-24"
+  },
+  {
+      "id": 16,
+      "title": "Machine Learning Algorithms",
+      "description": "Implement machine learning algorithms for tasks such as classification, regression, and clustering. Use libraries and frameworks such as scikit-learn and TensorFlow to develop and train machine learning models. Evaluate the performance of the models using appropriate metrics and fine-tune the algorithms for optimal results. Apply machine learning concepts to real-world datasets for practical applications.",
+      "marks": 90,
+      "thumbnail": "https://example.com/ml_thumbnail.jpg",
+      "difficultyLevel": "hard",
+      "dueDate": "2023-11-25"
+  },
+  {
+      "id": 17,
+      "title": "Web Security and Privacy",
+      "description": "Implement security measures to protect web applications and user data from cyber threats and vulnerabilities. Apply authentication and authorization mechanisms to control access to sensitive information. Implement secure communication protocols such as HTTPS and SSL to encrypt data transmission. Conduct security audits and risk assessments to identify potential security issues and recommend appropriate solutions.",
+      "marks": 80,
+      "thumbnail": "https://example.com/web_security_thumbnail.jpg",
+      "difficultyLevel": "medium",
+      "dueDate": "2023-11-26"
+  },
+  {
+      "id": 18,
+      "title": "Operating System Concepts",
+      "description": "Explore the fundamentals of operating systems and their components. Implement key concepts such as process management, memory management, and file system management. Analyze different types of operating systems and their functionalities in various computing environments. Demonstrate an understanding of key operating system principles through practical implementations and case studies.",
+      "marks": 70,
+      "thumbnail": "https://example.com/os_thumbnail.jpg",
+      "difficultyLevel": "medium",
+      "dueDate": "2023-11-27"
+  },
+  {
+      "id": 19,
+      "title": "Cloud Computing Technologies",
+      "description": "Explore cloud computing technologies and services such as Infrastructure as a Service (IaaS), Platform as a Service (PaaS), and Software as a Service (SaaS). Implement cloud-based solutions using providers like AWS, Google Cloud, or Azure. Develop an understanding of cloud architecture, deployment models, and security considerations for cloud-based applications and services.",
+      "marks": 60,
+      "thumbnail": "https://example.com/cloud_thumbnail.jpg",
+      "difficultyLevel": "easy",
+      "dueDate": "2023-11-28"
+  },
+  {
+      "id": 20,
+      "title": "Artificial Intelligence Fundamentals",
+      "description": "Explore the fundamentals of artificial intelligence and its applications in various domains. Implement basic AI algorithms such as search algorithms, decision trees, and neural networks. Analyze AI technologies and their impact on industries and society. Demonstrate an understanding of ethical considerations in AI development and deployment.",
+      "marks": 80,
+      "thumbnail": "https://example.com/ai_thumbnail.jpg",
+      "difficultyLevel": "medium",
+      "dueDate": "2023-11-29"
+  }
+]

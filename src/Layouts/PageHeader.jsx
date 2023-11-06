@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 const PageHeader = ({ title, description }) => {
   return (
-    <section className="bg-white py-0">
+    <section className="bg-gray-100 py-0">
       <div className="container-area py-10 border-b flex flex-col lg:flex-row justify-between gap-3 lg:gap-10 items-center">
         <div className="space-y-3">
-          <h2 className="text-3xl font-semibold text-center lg:text-left">
+          <h2 className="text-3xl font-semibold text-center lg:text-left capitalize">
             {title}
           </h2>
           {description && (
@@ -15,12 +15,12 @@ const PageHeader = ({ title, description }) => {
           )}
         </div>
         <div className="">
-          <nav className="flex" aria-label="Breadcrumb">
+          <nav className="flex text-gray-500" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
               <li className="inline-flex items-center">
                 <Link
                   to="/"
-                  className="inline-flex items-center text-sm font-medium text-gray-400 hover:text-black"
+                  className="inline-flex items-center text-sm font-medium hover:text-black"
                 >
                   <svg
                     className="w-3 h-3 mr-2.5"
@@ -51,7 +51,7 @@ const PageHeader = ({ title, description }) => {
                       d="m1 9 4-4-4-4"
                     />
                   </svg>
-                  <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
+                  <span className="ml-1 text-sm font-medium md:ml-2">
                     {title}
                   </span>
                 </div>
