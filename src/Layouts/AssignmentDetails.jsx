@@ -130,7 +130,6 @@ const AssignmentDetails = () => {
                 </form>
               </div>
             </Popup>
-            ;
           </div>
         </div>
       </section>
