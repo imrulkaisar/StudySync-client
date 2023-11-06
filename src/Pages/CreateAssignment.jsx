@@ -18,10 +18,12 @@ import { AiOutlineCalendar } from "react-icons/ai";
 
 import "react-datepicker/dist/react-datepicker.css";
 import useToast from "../Hooks/useToast";
+import useAxios from "../Hooks/useAxios";
 
 const CreateAssignment = () => {
   const { user } = useAuth();
   const { showToast } = useToast();
+  const axios = useAxios();
 
   // form states
   const [title, setTitle] = useState("");
@@ -58,7 +60,19 @@ const CreateAssignment = () => {
       },
     };
 
-    console.log(assignmentData);
+    postAssignment(assignmentData);
+  };
+
+  const postAssignment = async (data) => {
+    try {
+      const response = await axios.post("/create-assignment", data);
+
+      if (response.data.insertedId) {
+        showToast("success", "Assignment added successfully!");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const validateForm = () => {

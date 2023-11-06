@@ -7,7 +7,7 @@ const useToast = () => {
       text: title,
       toast: true,
       showConfirmButton: false,
-      timer: 2000,
+      timer: 3000,
       timerProgressBar: true,
     });
   };

@@ -4,7 +4,7 @@
       "title": "Basic HTML Page",
       "description": "Create a basic HTML page with necessary tags such as <html>, <head>, and <body>. Add relevant content including headings, paragraphs, and lists. Insert an image using the <img> tag and create a simple form with input fields and a submit button. Add appropriate attributes to each element for better accessibility and user interaction.",
       "marks": 50,
-      "thumbnail": "https://example.com/html_thumbnail.jpg",
+      "thumbnail": "https://tinyurl.com/ywydfrz3",
       "difficultyLevel": "easy",
       "dueDate": "2023-11-10"
   },
@@ -13,7 +13,7 @@
       "title": "CSS Styling",
       "description": "Apply CSS to the HTML page created in the previous assignment. Use selectors to target specific elements and apply styles such as colors, fonts, and layouts. Create a responsive design using media queries to ensure the website layout adjusts to different screen sizes. Experiment with different CSS properties to enhance the visual appeal of the webpage.",
       "marks": 60,
-      "thumbnail": "https://example.com/css_thumbnail.jpg",
+      "thumbnail": "https://tinyurl.com/34v9w3nu",
       "difficultyLevel": "medium",
       "dueDate": "2023-11-11"
   },
