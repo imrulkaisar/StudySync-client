@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const PageHeader = ({ title, description }) => {
+const PageHeader = ({ title, description, steps = [] }) => {
   return (
     <section className="bg-gray-100 py-0">
       <div className="container-area py-10 border-b flex flex-col lg:flex-row justify-between gap-3 lg:gap-10 items-center">
@@ -34,6 +34,32 @@ const PageHeader = ({ title, description }) => {
                   Home
                 </Link>
               </li>
+              {/* steps */}
+              {steps.length > 0 &&
+                steps.map((step, index) => (
+                  <li key={index}>
+                    <div className="flex items-center">
+                      <svg
+                        className="w-3 h-3 text-gray-400 mx-1"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 6 10"
+                      >
+                        <path
+                          stroke="#fff"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="m1 9 4-4-4-4"
+                        />
+                      </svg>
+                      <Link to={step.link} className="ml-1 text-sm font-medium">
+                        {step.title}
+                      </Link>
+                    </div>
+                  </li>
+                ))}
               <li aria-current="page">
                 <div className="flex items-center">
                   <svg
