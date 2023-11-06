@@ -17,8 +17,8 @@ import { useEffect } from "react";
 
 const Assignments = () => {
   const axios = useAxios();
-
   const [assignments, setAssignments] = useState([]);
+
   const [difficultyLabel, setDifficultyLabel] = useState("none");
   const [totalAssignments, setTotalAssignments] = useState(48);
   const [itemPerPage, setItemPerPage] = useState(8);

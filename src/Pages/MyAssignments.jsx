@@ -9,13 +9,18 @@
 
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AssignmentCard from "../Components/AssignmentCard";
 import PageHeader from "../Layouts/PageHeader";
+import useAxios from "../Hooks/useAxios";
+import useAuth from "../Hooks/useAuth";
 
 const MyAssignments = () => {
-  const [difficultyLabel, setDifficultyLabel] = useState("none");
+  const axios = useAxios();
+  const { user } = useAuth();
+  const [assignments, setAssignments] = useState([]);
 
+  const [difficultyLabel, setDifficultyLabel] = useState("none");
   const [totalAssignments, setTotalAssignments] = useState(48);
   const [itemPerPage, setItemPerPage] = useState(8);
   const [currentPage, setCurrentPage] = useState(0);
@@ -28,7 +33,21 @@ const MyAssignments = () => {
     setCurrentPage(0);
   };
 
-  // console.log(pages);
+  const loadAssignment = async () => {
+    try {
+      const response = await axios.get(`/assignments/?email=${user.email}`);
+
+      setAssignments(response.data);
+
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    loadAssignment();
+  }, [user]);
 
   return (
     <>
@@ -82,10 +101,13 @@ const MyAssignments = () => {
             </div>
           </div>
           <div className="grid lg:grid-cols-2 gap-10">
-            <AssignmentCard />
-            <AssignmentCard />
-            <AssignmentCard />
-            <AssignmentCard />
+            {user ? (
+              assignments.map((assignment) => (
+                <AssignmentCard key={assignment._id} data={assignment} />
+              ))
+            ) : (
+              <p>Loading data...</p>
+            )}
           </div>
 
           {/* Pagination */}
