@@ -5,7 +5,7 @@ const PageHeader = ({ title, description, steps = [] }) => {
     <section className="bg-gray-100 py-0">
       <div className="container-area py-10 border-b flex flex-col lg:flex-row justify-between gap-3 lg:gap-10 items-center">
         <div className="space-y-3">
-          <h2 className="text-3xl font-semibold text-center lg:text-left capitalize">
+          <h2 className="text-2xl font-semibold text-center lg:text-left capitalize">
             {title}
           </h2>
           {description && (
