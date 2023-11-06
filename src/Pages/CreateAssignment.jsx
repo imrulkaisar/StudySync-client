@@ -17,7 +17,6 @@ import DatePicker from "react-datepicker";
 import { AiOutlineCalendar } from "react-icons/ai";
 
 import "react-datepicker/dist/react-datepicker.css";
-import Swal from "sweetalert2";
 import useToast from "../Hooks/useToast";
 
 const CreateAssignment = () => {
