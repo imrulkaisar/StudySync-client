@@ -20,7 +20,7 @@ const AssignmentDetails = () => {
         steps={[{ link: "/assignments", title: "All assignments" }]}
       />
       <section>
-        <div className="container-area flex gap-10">
+        <div className="container-area flex flex-col lg:flex-row items-center lg:items-start gap-10">
           <div className="flex-grow space-y-8">
             <img
               className="w-full aspect-video object-cover rounded-lg"

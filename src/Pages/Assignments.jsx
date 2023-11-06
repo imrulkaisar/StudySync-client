@@ -16,7 +16,7 @@ import PageHeader from "../Layouts/PageHeader";
 const Assignments = () => {
   const [difficultyLabel, setDifficultyLabel] = useState("none");
 
-  const [totalAssignments, setTotalAssignments] = useState(24);
+  const [totalAssignments, setTotalAssignments] = useState(48);
   const [itemPerPage, setItemPerPage] = useState(8);
   const [currentPage, setCurrentPage] = useState(0);
   const pageNumber = Math.ceil(totalAssignments / itemPerPage);
@@ -28,7 +28,7 @@ const Assignments = () => {
     setCurrentPage(0);
   };
 
-  console.log(pages);
+  // console.log(pages);
 
   return (
     <>
@@ -39,9 +39,11 @@ const Assignments = () => {
           <h2 className="section-title capitalize text-center">
             Taka a challenge
           </h2>
-          <div className="flex justify-between items-center">
-            <p>Showing 8 assignments of total 24</p>
-            <div className="flex gap-[1px] rounded-lg overflow-hidden min-w-min border bg-gray-300 border-gray-300">
+          <div className="flex flex-col lg:flex-row gap-5 justify-between items-center">
+            <p>
+              Showing {itemPerPage} assignments of total {totalAssignments}
+            </p>
+            <div className="flex gap-[1px] rounded-lg overflow-hidden min-w-min border bg-gray-300 border-gray-300 scale-75 lg:scale-100">
               <label
                 className={`btn bg-white rounded-none cursor-pointer ${
                   difficultyLabel === "none" ? "bg-gray-600 text-white" : ""
@@ -84,11 +86,8 @@ const Assignments = () => {
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-between items-center">
-            <p>
-              Showing {itemPerPage} assignments of total {totalAssignments}
-            </p>
-            <div className="flex gap-3 justify-center">
+          <div className="flex flex-col lg:flex-row gap-5 justify-between items-center">
+            <div className="flex gap-3 justify-center lg:order-2 flex-wrap max-w-md">
               {pages.map((page, index) => (
                 <button
                   className={`px-5 py-2 border text-lg bg-gray-50 rounded-md ${
@@ -101,7 +100,11 @@ const Assignments = () => {
                 </button>
               ))}
             </div>
-            <div className="flex gap-3 items-center">
+            <p className="lg:order-1">
+              Showing {itemPerPage} assignments of total {totalAssignments}
+            </p>
+
+            <div className="flex gap-3 items-center lg:order-3">
               <p>Show per page: </p>
               <select
                 name="itemPerPage"
