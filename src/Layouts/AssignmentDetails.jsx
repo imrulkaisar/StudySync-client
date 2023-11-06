@@ -10,9 +10,34 @@
 
  */
 
+import Popup from "reactjs-popup";
 import PageHeader from "./PageHeader";
 
+import "reactjs-popup/dist/index.css";
+import { useState } from "react";
+import useAuth from "../Hooks/useAuth";
+
 const AssignmentDetails = () => {
+  const { user } = useAuth();
+  const [pdfLink, setPdfLink] = useState("");
+  const [note, setNote] = useState("");
+
+  const handleAssignmentSubmit = (e) => {
+    e.preventDefault();
+
+    const assignmentData = {
+      pdfLink,
+      note,
+      examinee: {
+        name: user.displayName,
+        email: user.email,
+      },
+      status: "pending",
+    };
+
+    console.log(assignmentData);
+  };
+
   return (
     <>
       <PageHeader
@@ -39,7 +64,6 @@ const AssignmentDetails = () => {
             <div className="w-full p-5 text-center bg-secondaryShadow text-white text-xl rounded-lg">
               Difficulty Level Medium
             </div>
-
             <div className="border px-5 py-8 text-center space-y-4 bg-gray-100">
               <h4 className="font-semibold text-lg">Created by</h4>
               <div>
@@ -52,11 +76,61 @@ const AssignmentDetails = () => {
                 <p className="text-xs">imrulkaisar3@gmail.com</p>
               </div>
             </div>
-
             <div className="text-3xl text-center">Total Marks: 60</div>
-            <button className="btn btn-primary w-full py-5">
-              Take Assignment
-            </button>
+            <Popup
+              trigger={(open) => (
+                <button className="btn btn-primary w-full py-5">
+                  Take Assignment
+                </button>
+              )}
+              position="right center"
+              closeOnDocumentClick
+              modal
+              contentStyle={{
+                borderRadius: "10px",
+              }}
+            >
+              <div className="p-8 min-h-[300px] rounded-lg space-y-8">
+                <h4 className="text-center text-3xl font-semibold capitalize">
+                  Submit your assignment
+                </h4>
+                <form className="space-y-5" onSubmit={handleAssignmentSubmit}>
+                  <div className="form-group col-span-3">
+                    <label className="sr-only" htmlFor="title">
+                      PDF link of your assignment
+                    </label>
+                    <input
+                      className="form-input bg-gray-100"
+                      type="text"
+                      name="title"
+                      id="title"
+                      placeholder="PDF link of your assignment"
+                      onChange={(e) => setPdfLink(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-span-3">
+                    <label className="sr-only" htmlFor="description">
+                      Your Note
+                    </label>
+                    <textarea
+                      className="form-input min-h-[150px] bg-gray-100"
+                      name="description"
+                      id="description"
+                      placeholder="Your Note"
+                      onChange={(e) => setNote(e.target.value)}
+                      required
+                    ></textarea>
+                  </div>
+                  <div className="text-center">
+                    <button type="submit" className="btn btn-primary mx-auto">
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </Popup>
+            ;
           </div>
         </div>
       </section>
