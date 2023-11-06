@@ -13,12 +13,31 @@
 
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SubmittedAssignment from "../Components/SubmittedAssignment";
 import PageHeader from "../Layouts/PageHeader";
+import useAxios from "../Hooks/useAxios";
 
 const SubmittedAssignments = () => {
+  const axios = useAxios();
   const [submittedStatus, setSubmittedStatus] = useState("pending");
+  const [submittedAssignments, setSubmittedAssignments] = useState([]);
+
+  const loadSubmittedAssignment = async () => {
+    try {
+      const response = await axios.get("/submitted-assignments");
+
+      setSubmittedAssignments(response.data);
+
+      // console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    loadSubmittedAssignment();
+  }, []);
 
   return (
     <>
@@ -70,9 +89,9 @@ const SubmittedAssignments = () => {
                 </tr>
               </thead>
               <tbody className="text-base odd:bg-gray-300 even:bg-white">
-                <SubmittedAssignment />
-                <SubmittedAssignment />
-                <SubmittedAssignment />
+                {submittedAssignments.map((assignment) => (
+                  <SubmittedAssignment key={assignment._id} data={assignment} />
+                ))}
               </tbody>
             </table>
           </div>

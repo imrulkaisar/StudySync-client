@@ -12,10 +12,14 @@
 import { useState } from "react";
 import AssignmentCard from "../Components/AssignmentCard";
 import PageHeader from "../Layouts/PageHeader";
+import useAxios from "../Hooks/useAxios";
+import { useEffect } from "react";
 
 const Assignments = () => {
-  const [difficultyLabel, setDifficultyLabel] = useState("none");
+  const axios = useAxios();
 
+  const [assignments, setAssignments] = useState([]);
+  const [difficultyLabel, setDifficultyLabel] = useState("none");
   const [totalAssignments, setTotalAssignments] = useState(48);
   const [itemPerPage, setItemPerPage] = useState(8);
   const [currentPage, setCurrentPage] = useState(0);
@@ -27,6 +31,22 @@ const Assignments = () => {
     setItemPerPage(value);
     setCurrentPage(0);
   };
+
+  const loadAssignment = async () => {
+    try {
+      const response = await axios.get("/assignments");
+
+      setAssignments(response.data);
+
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    loadAssignment();
+  }, []);
 
   // console.log(pages);
 
@@ -79,10 +99,9 @@ const Assignments = () => {
             </div>
           </div>
           <div className="grid lg:grid-cols-2 gap-10">
-            <AssignmentCard />
-            <AssignmentCard />
-            <AssignmentCard />
-            <AssignmentCard />
+            {assignments.map((assignment) => (
+              <AssignmentCard key={assignment._id} data={assignment} />
+            ))}
           </div>
 
           {/* Pagination */}

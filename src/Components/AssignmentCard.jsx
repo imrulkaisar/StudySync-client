@@ -9,14 +9,25 @@ import { BsEye } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-const AssignmentCard = () => {
-  const detailsLink = "/assignment/id";
+const AssignmentCard = ({ data }) => {
+  const {
+    _id,
+    title,
+    description,
+    marks,
+    thumbnail,
+    difficultyLabel,
+    dueDate,
+    author,
+  } = data || {};
+
+  const detailsLink = `/assignment/${_id}`;
   return (
     <article className="md:flex rounded-lg overflow-hidden w-full relative bg-gray-50">
       <Link to={detailsLink}>
         <img
           className="w-full md:w-56 aspect-video object-cover"
-          src="https://th.bing.com/th/id/OIP.C3YgRLy7VOqgL3tAbyWEQQAAAA?pid=ImgDet&rs=1"
+          src={thumbnail}
           alt=""
         />
       </Link>
@@ -25,11 +36,13 @@ const AssignmentCard = () => {
       </span>
       <div className="p-5 border flex-grow rounded-tr-lg rounded-br-lg">
         <Link to={detailsLink}>
-          <h4 className="font-medium text-lg">Basic HTML Page</h4>
+          <h4 className="font-medium text-lg">{title}</h4>
         </Link>
         <p>
-          Total mark:{" "}
-          <span className="text-secondaryShadow font-bold text-xl">90</span>
+          Total marks:{" "}
+          <span className="text-secondaryShadow font-bold text-xl">
+            {marks}
+          </span>
         </p>
         <div className="mt-5 flex gap-5 justify-between">
           <Link
@@ -39,7 +52,7 @@ const AssignmentCard = () => {
             <BsEye /> <span>view details</span>
           </Link>
           <Link
-            to={`/update-assignment/id`}
+            to={`/update-assignment/${_id}`}
             className="flex gap-2 items-center uppercase text-xs tracking-wider border-b border-t py-1 border-gray-400 border-dotted hover:text-secondaryShadow"
           >
             <AiOutlineEdit /> <span>Edit</span>

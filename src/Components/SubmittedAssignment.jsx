@@ -1,16 +1,23 @@
 import { useState } from "react";
 import Popup from "reactjs-popup";
 import useAuth from "../Hooks/useAuth";
+import useAxios from "../Hooks/useAxios";
+import useToast from "../Hooks/useToast";
 
-const SubmittedAssignment = () => {
+const SubmittedAssignment = ({ data }) => {
   const { user } = useAuth();
-  const [mark, setMark] = useState(null);
+  const axios = useAxios();
+  const { showToast } = useToast();
+  const [givenMark, setGivenMark] = useState(null);
   const [feedback, setFeedback] = useState("");
+  const { _id, assignment, pdfLink, note, examinee, status } = data || {};
+
+  // console.log(Object.keys(data).join(", "));
 
   const handleMarking = (e) => {
     e.preventDefault();
     const assignmentData = {
-      mark,
+      givenMark,
       feedback,
       examiner: {
         name: user.displayName,
@@ -20,6 +27,19 @@ const SubmittedAssignment = () => {
     };
 
     console.log(assignmentData);
+    updateAssignment(assignmentData);
+  };
+
+  const updateAssignment = async (data) => {
+    try {
+      const response = await axios.patch(`submitted-assignments/${_id}`, data);
+
+      if (response.data.modifiedCount > 0) {
+        showToast("success", "Assignment evaluated successfully!");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -29,11 +49,11 @@ const SubmittedAssignment = () => {
           scope="row"
           className="px-6 py-7 font-medium text-gray-900 whitespace-nowrap"
         >
-          Basic HTML Page
+          {assignment && assignment.title}
         </th>
-        <td className="px-6 py-7">60</td>
-        <td className="px-6 py-7">Imrul Kaisar</td>
-        <td className="px-6 py-7">Pending</td>
+        <td className="px-6 py-7">{assignment && assignment.marks}</td>
+        <td className="px-6 py-7">{examinee && examinee.name}</td>
+        <td className="px-6 py-7">{status}</td>
         <td className="px-6 py-7">
           <Popup
             trigger={(open) => (
@@ -54,18 +74,20 @@ const SubmittedAssignment = () => {
               </h4>
               <div className="space-y-2">
                 <p>
-                  <b>PDF Link: </b>
-                  <a className="text-secondary" href="#">
-                    Google Drive Link
+                  <a
+                    className="text-secondary"
+                    href={pdfLink}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <b>PDF Link</b>
                   </a>
                 </p>
                 <p>
-                  <b>Examinee Notes:</b> Lorem ipsum dolor sit amet consectetur,
-                  adipisicing elit. Quae ducimus totam beatae odit quisquam?
-                  Odit.
+                  <b>Examinee Notes:</b> {note}
                 </p>
                 <p>
-                  <b>Total Mark:</b> 60
+                  <b>Total Mark:</b> {assignment && assignment.marks}
                 </p>
               </div>
               <form className="space-y-5" onSubmit={handleMarking}>
@@ -74,13 +96,15 @@ const SubmittedAssignment = () => {
                     Your Mark
                   </label>
                   <input
-                    className="form-input bg-gray-100 w-24"
-                    type="text"
+                    className="form-input bg-gray-100 w-52"
+                    type="number"
                     name="mark"
                     id="mark"
                     placeholder="Mark"
-                    onChange={(e) => setMark(e.target.value)}
+                    onChange={(e) => setGivenMark(e.target.value)}
                     required
+                    min="0"
+                    max={assignment && assignment.marks}
                   />
                 </div>
                 <div className="form-group col-span-3">
