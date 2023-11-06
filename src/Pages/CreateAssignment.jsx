@@ -3,7 +3,7 @@
  * Requirements:
  * ====================
  * [Done] 1. Any logged in user is able to create an assignment for all users.
- * 2. An assignment will have a title, description, marks, thumbnail Image URL, assignment difficulty level(easy, medium, hard) [YOU MAY USE DROPDOWN SELECT INPUT FIELD], and due date [use this package for selecting date “https://www.npmjs.com/package/react-datepicker”]
+ * [Done] 2. An assignment will have a title, description, marks, thumbnail Image URL, assignment difficulty level(easy, medium, hard) [YOU MAY USE DROPDOWN SELECT INPUT FIELD], and due date [use this package for selecting date “https://www.npmjs.com/package/react-datepicker”]
  * 3. A success message will be shown when the assignment will be created successfully. [YOU MAY USE TOAST OF MODAL]
  * 4. While a user will create an assignment you have to store the user email with the assignment data [followed by Assignment creation requirement] . And then while a user will be trying to delete an assignment you will compare the current user email with the assignment creator email. And if it matches then the assignment will be deleted.
  * 5. [Bonus] Add validation in the create assignment form.
@@ -17,9 +17,12 @@ import DatePicker from "react-datepicker";
 import { AiOutlineCalendar } from "react-icons/ai";
 
 import "react-datepicker/dist/react-datepicker.css";
+import Swal from "sweetalert2";
+import useToast from "../Hooks/useToast";
 
 const CreateAssignment = () => {
   const { user } = useAuth();
+  const { showToast } = useToast();
 
   // form states
   const [title, setTitle] = useState("");
@@ -29,8 +32,18 @@ const CreateAssignment = () => {
   const [difficultyLabel, setDifficultyLabel] = useState("None");
   const [dueDate, setDueDate] = useState(new Date());
 
+  const isUrl = (url) => {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
   const handleAddAssignment = (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
 
     const assignmentData = {
       title,
@@ -47,6 +60,32 @@ const CreateAssignment = () => {
     };
 
     console.log(assignmentData);
+  };
+
+  const validateForm = () => {
+    if (
+      !title ||
+      !description ||
+      !marks ||
+      !thumbnail ||
+      difficultyLabel === "None" ||
+      !dueDate
+    ) {
+      showToast("error", "Please fill out all the fields.");
+      return false;
+    }
+
+    if (marks < 0 || isNaN(marks)) {
+      showToast("error", "Marks must be a positive number");
+      return false;
+    }
+
+    if (!isUrl(thumbnail)) {
+      showToast("error", "Please enter a valid URL for the thumbnail");
+      return false;
+    }
+
+    return true;
   };
 
   return (
