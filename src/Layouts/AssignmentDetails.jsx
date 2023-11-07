@@ -12,19 +12,22 @@
 
 import Popup from "reactjs-popup";
 import PageHeader from "./PageHeader";
+import { BiTrash } from "react-icons/bi";
 
 import "reactjs-popup/dist/index.css";
 import { useEffect, useState } from "react";
 import useAuth from "../Hooks/useAuth";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import useAxios from "../Hooks/useAxios";
 import useToast from "../Hooks/useToast";
+import Swal from "sweetalert2";
 
 const AssignmentDetails = () => {
   const { user } = useAuth();
   const { id } = useParams();
   const axios = useAxios();
   const { showToast } = useToast();
+  const navigate = useNavigate();
 
   const [assignment, setAssignment] = useState({});
   const [pdfLink, setPdfLink] = useState("");
@@ -94,6 +97,38 @@ const AssignmentDetails = () => {
   useEffect(() => {
     loadAssignment();
   }, []);
+
+  const handleDeleteAssignment = () => {
+    Swal.fire({
+      title: "Do you want to delete this assignment?",
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      confirmButtonColor: "red",
+      focusConfirm: false,
+      focusCancel: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteAssignment();
+      }
+    });
+  };
+
+  const deleteAssignment = async () => {
+    try {
+      const response = await axios.delete(`/delete-assignment/${_id}`);
+
+      if (response.data.deletedCount > 0) {
+        showToast("success", "Assignment deleted successfully!");
+        setTimeout(() => {
+          navigate("/assignments");
+        }, 2000);
+      } else {
+        showToast("error", "Something wrong! Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -191,6 +226,13 @@ const AssignmentDetails = () => {
                 </form>
               </div>
             </Popup>
+
+            <button
+              onClick={handleDeleteAssignment}
+              className="btn w-full border-2 border-red-600 text-red-600 bg-red-200 flex gap-2 items-center hover:bg-red-600 hover:text-white"
+            >
+              <BiTrash /> <span>Delete this assignment</span>
+            </button>
           </div>
         </div>
       </section>

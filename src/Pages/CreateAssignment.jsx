@@ -19,11 +19,13 @@ import { AiOutlineCalendar } from "react-icons/ai";
 import "react-datepicker/dist/react-datepicker.css";
 import useToast from "../Hooks/useToast";
 import useAxios from "../Hooks/useAxios";
+import { useNavigate } from "react-router-dom";
 
 const CreateAssignment = () => {
   const { user } = useAuth();
   const { showToast } = useToast();
   const axios = useAxios();
+  const navigate = useNavigate();
 
   // form states
   const [title, setTitle] = useState("");
@@ -69,6 +71,11 @@ const CreateAssignment = () => {
 
       if (response.data.insertedId) {
         showToast("success", "Assignment added successfully!");
+        setTimeout(() => {
+          navigate("/assignments");
+        }, 2000);
+      } else {
+        showToast("error", "Something wrong! Please try again.");
       }
     } catch (error) {
       console.error(error);
