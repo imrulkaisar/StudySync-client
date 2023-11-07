@@ -11,7 +11,7 @@
 
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PageHeader from "../Layouts/PageHeader";
 import useAuth from "../Hooks/useAuth";
 import DatePicker from "react-datepicker";
@@ -19,18 +19,34 @@ import { AiOutlineCalendar } from "react-icons/ai";
 
 import "react-datepicker/dist/react-datepicker.css";
 import useToast from "../Hooks/useToast";
+import { useNavigate, useParams } from "react-router-dom";
+import useAxios from "../Hooks/useAxios";
 
 const UpdateAssignment = () => {
-  const { user } = useAuth();
+  const { id } = useParams();
+  const axios = useAxios();
   const { showToast } = useToast();
+  const navigate = useNavigate();
+
+  const [assignment, setAssignment] = useState({});
+  const {
+    _id,
+    title,
+    description,
+    marks,
+    thumbnail,
+    difficultyLabel,
+    dueDate,
+    author,
+  } = assignment || {};
 
   // form states
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [marks, setMarks] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
-  const [difficultyLabel, setDifficultyLabel] = useState("None");
-  const [dueDate, setDueDate] = useState(new Date());
+  const [newTitle, setNewTitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+  const [newMarks, setNewMarks] = useState("");
+  const [newThumbnail, setThumbnail] = useState("");
+  const [newDifficultyLabel, setNewDifficultyLabel] = useState("");
+  const [newDueDate, setNewDueDate] = useState(new Date());
 
   const isUrl = (url) => {
     try {
@@ -46,47 +62,79 @@ const UpdateAssignment = () => {
     if (!validateForm()) return;
 
     const assignmentData = {
-      title,
-      description,
-      marks,
-      thumbnail,
-      difficultyLabel,
-      dueDate,
-      author: {
-        name: user.displayName || "",
-        email: user.email || "",
-        image: user.photoURL || "",
-      },
+      newTitle,
+      newDescription,
+      newMarks,
+      newThumbnail,
+      newDifficultyLabel,
+      newDueDate,
     };
+    updateAssignmentData(assignmentData);
+  };
 
-    console.log(assignmentData);
+  const updateAssignmentData = async (data) => {
+    try {
+      const response = await axios.patch(`/update-assignment/${_id}`, data);
+
+      if (response.data.modifiedCount > 0) {
+        showToast("success", "Assignment updated successfully!");
+
+        navigate("/assignments");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const validateForm = () => {
     if (
-      !title ||
-      !description ||
-      !marks ||
-      !thumbnail ||
-      difficultyLabel === "None" ||
-      !dueDate
+      !newTitle ||
+      !newDescription ||
+      !newMarks ||
+      !newThumbnail ||
+      newDifficultyLabel === "None" ||
+      !newDueDate
     ) {
       showToast("error", "Please fill out all the fields.");
       return false;
     }
 
-    if (marks < 0 || isNaN(marks)) {
+    if (newMarks < 0 || isNaN(newMarks)) {
       showToast("error", "Marks must be a positive number");
       return false;
     }
 
-    if (!isUrl(thumbnail)) {
+    if (!isUrl(newThumbnail)) {
       showToast("error", "Please enter a valid URL for the thumbnail");
       return false;
     }
 
     return true;
   };
+
+  useEffect(() => {
+    const loadAssignment = async () => {
+      try {
+        const response = await axios.get(`/assignments/${id}`);
+
+        const assignmentData = response.data[0];
+        setAssignment(assignmentData);
+
+        setNewTitle(assignmentData.title);
+        setNewDescription(assignmentData.description);
+        setNewMarks(assignmentData.marks);
+        setThumbnail(assignmentData.thumbnail);
+        setNewDifficultyLabel(assignmentData.difficultyLabel);
+        setNewDueDate(new Date(assignmentData.dueDate));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    loadAssignment();
+  }, [id, axios]);
+
+  // console.log(assignment);
 
   return (
     <>
@@ -107,65 +155,69 @@ const UpdateAssignment = () => {
               <input
                 className="form-input"
                 type="text"
-                name="title"
+                name="newTitle"
                 id="title"
                 placeholder="Assignment Title"
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => setNewTitle(e.target.value)}
                 required
+                defaultValue={title}
               />
             </div>
             <div className="form-group col-span-3">
-              <label className="" htmlFor="description">
+              <label className="" htmlFor="newDescription">
                 Description
               </label>
               <textarea
                 className="form-input min-h-[150px]"
-                name="description"
-                id="description"
+                name="newDescription"
+                id="newDescription"
                 placeholder="Description"
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => setNewDescription(e.target.value)}
                 required
+                defaultValue={description}
               ></textarea>
             </div>
             <div className="form-group col-span-2">
-              <label className="" htmlFor="thumbnail">
+              <label className="" htmlFor="newThumbnail">
                 Thumbnail URL
               </label>
               <input
                 className="form-input"
                 type="text"
-                name="thumbnail"
-                id="thumbnail"
+                name="newThumbnail"
+                id="newThumbnail"
                 placeholder="Thumbnail URL"
                 onChange={(e) => setThumbnail(e.target.value)}
                 required
+                defaultValue={thumbnail}
               />
             </div>
             <div className="form-group">
-              <label className="" htmlFor="marks">
+              <label className="" htmlFor="newMarks">
                 Total Marks
               </label>
               <input
                 className="form-input"
                 type="text"
-                name="marks"
-                id="marks"
+                name="newMarks"
+                id="newMarks"
                 placeholder="Total Marks"
-                onChange={(e) => setMarks(e.target.value)}
+                onChange={(e) => setNewMarks(e.target.value)}
                 required
+                defaultValue={marks}
               />
             </div>
             <div className="form-group">
-              <label className="" htmlFor="dueDate">
+              <label className="" htmlFor="newDueDate">
                 Due Date
               </label>
               {/* <input
                 className="form-input"
                 type="date"
-                name="dueDate"
-                id="dueDate"
+                name="newDueDate"
+                id="newDueDate"
                 placeholder="Due Date"
-                onChange={(e) => setDueDate(e.target.value)}
+                onChange={(e) => setNewDueDate(e.target.value)}
                 required
               /> */}
               <div className="form-input py-2 px-4">
@@ -173,8 +225,8 @@ const UpdateAssignment = () => {
                   showIcon
                   icon={<AiOutlineCalendar className="text-lg text-gray-400" />}
                   className="fom-input text-gray-600"
-                  selected={dueDate}
-                  onChange={(date) => setDueDate(date)}
+                  selected={newDueDate}
+                  onChange={(date) => setNewDueDate(date)}
                 />
               </div>
             </div>
@@ -182,26 +234,26 @@ const UpdateAssignment = () => {
               <div className="">Difficulty Level:</div>
               <div className="flex gap-1 rounded-lg overflow-hidden min-w-min">
                 <label
-                  className={`btn bg-white rounded-none ${
-                    difficultyLabel === "easy" ? "bg-gray-600 text-white" : ""
+                  className={`btn rounded-none ${
+                    difficultyLabel === "easy" ? "bg-gray-800 text-white" : ""
                   }`}
-                  onClick={() => setDifficultyLabel("easy")}
+                  onClick={() => setNewDifficultyLabel("easy")}
                 >
                   Easy
                 </label>
                 <label
-                  className={`btn bg-white rounded-none ${
-                    difficultyLabel === "medium" ? "bg-gray-600 text-white" : ""
+                  className={`btn rounded-none ${
+                    difficultyLabel === "medium" ? "bg-gray-800 text-white" : ""
                   }`}
-                  onClick={() => setDifficultyLabel("medium")}
+                  onClick={() => setNewDifficultyLabel("medium")}
                 >
                   Medium
                 </label>
                 <label
-                  className={`btn bg-white rounded-none ${
-                    difficultyLabel === "hard" ? "bg-gray-600 text-white" : ""
+                  className={`btn rounded-none ${
+                    difficultyLabel === "hard" ? "bg-gray-800 text-white" : ""
                   }`}
-                  onClick={() => setDifficultyLabel("hard")}
+                  onClick={() => setNewDifficultyLabel("hard")}
                 >
                   Hard
                 </label>
