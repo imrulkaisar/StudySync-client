@@ -31,8 +31,8 @@ const AssignmentCard = ({ data }) => {
           alt=""
         />
       </Link>
-      <span className="absolute gradient-bg py-1 px-5 rounded-br-lg text-white top-0 left-0">
-        Easy
+      <span className="absolute gradient-bg py-1 px-5 rounded-br-lg text-white top-0 left-0 text-sm uppercase">
+        {difficultyLabel}
       </span>
       <div className="p-5 border flex-grow rounded-tr-lg rounded-br-lg">
         <Link to={detailsLink}>

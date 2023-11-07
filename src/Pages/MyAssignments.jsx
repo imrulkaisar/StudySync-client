@@ -20,7 +20,7 @@ const MyAssignments = () => {
   const { user } = useAuth();
   const [assignments, setAssignments] = useState([]);
 
-  const [difficultyLabel, setDifficultyLabel] = useState("none");
+  const [difficultyLabel, setDifficultyLabel] = useState(null);
   const [totalAssignments, setTotalAssignments] = useState(48);
   const [itemPerPage, setItemPerPage] = useState(8);
   const [currentPage, setCurrentPage] = useState(0);
@@ -35,7 +35,9 @@ const MyAssignments = () => {
 
   const loadAssignment = async () => {
     try {
-      const response = await axios.get(`/assignments/?email=${user.email}`);
+      const response = await axios.get(
+        `/assignments/?email=${user.email}&difficultyLabel=${difficultyLabel}`
+      );
 
       setAssignments(response.data);
 
@@ -47,7 +49,7 @@ const MyAssignments = () => {
 
   useEffect(() => {
     loadAssignment();
-  }, [user]);
+  }, [user, difficultyLabel]);
 
   return (
     <>
@@ -67,32 +69,40 @@ const MyAssignments = () => {
             </p>
             <div className="flex gap-[1px] rounded-lg overflow-hidden min-w-min border bg-gray-300 border-gray-300 scale-75 lg:scale-100">
               <label
-                className={`btn bg-white rounded-none cursor-pointer ${
-                  difficultyLabel === "none" ? "bg-gray-600 text-white" : ""
+                className={`btn rounded-none cursor-pointer ${
+                  difficultyLabel === null
+                    ? "bg-gray-800 text-white"
+                    : "bg-gray-100"
                 }`}
-                onClick={() => setDifficultyLabel("none")}
+                onClick={() => setDifficultyLabel(null)}
               >
                 All
               </label>
               <label
-                className={`btn bg-white rounded-none cursor-pointer ${
-                  difficultyLabel === "easy" ? "bg-gray-600 text-white" : ""
+                className={`btn rounded-none cursor-pointer ${
+                  difficultyLabel === "easy"
+                    ? "bg-gray-800 text-white"
+                    : "bg-gray-100"
                 }`}
                 onClick={() => setDifficultyLabel("easy")}
               >
                 Easy
               </label>
               <label
-                className={`btn bg-white rounded-none cursor-pointer ${
-                  difficultyLabel === "medium" ? "bg-gray-600 text-white" : ""
+                className={`btn rounded-none cursor-pointer ${
+                  difficultyLabel === "medium"
+                    ? "bg-gray-800 text-white"
+                    : "bg-gray-100"
                 }`}
                 onClick={() => setDifficultyLabel("medium")}
               >
                 Medium
               </label>
               <label
-                className={`btn bg-white rounded-none cursor-pointer ${
-                  difficultyLabel === "hard" ? "bg-gray-600 text-white" : ""
+                className={`btn rounded-none cursor-pointer ${
+                  difficultyLabel === "hard"
+                    ? "bg-gray-800 text-white"
+                    : "bg-gray-100"
                 }`}
                 onClick={() => setDifficultyLabel("hard")}
               >
@@ -101,12 +111,14 @@ const MyAssignments = () => {
             </div>
           </div>
           <div className="grid lg:grid-cols-2 gap-10">
-            {user ? (
+            {user && assignments.length > 0 ? (
               assignments.map((assignment) => (
                 <AssignmentCard key={assignment._id} data={assignment} />
               ))
             ) : (
-              <p>Loading data...</p>
+              <p className="text-center text-5xl col-span-2 py-16 text-gray-400">
+                No data found...
+              </p>
             )}
           </div>
 
