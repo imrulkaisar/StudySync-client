@@ -12,6 +12,7 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import NotFound from "../Pages/NotFound";
 import PrivateRouter from "./PrivateRouter";
+import MySubmittedAssignments from "../Pages/MySubmittedAssignments";
 
 const Routers = createBrowserRouter([
   {
@@ -63,6 +64,14 @@ const Routers = createBrowserRouter([
         element: (
           <PrivateRouter>
             <MyAssignments />
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "my-submitted-assignments",
+        element: (
+          <PrivateRouter>
+            <MySubmittedAssignments />
           </PrivateRouter>
         ),
       },

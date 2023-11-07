@@ -1,15 +1,11 @@
 /**
- *
+ * 
  * Requirements:
- * ================================
- * [Done] 1. The submitted assignment page will contain all submitted assignments by the users.
- * [Done] 2. Only pending assignments will be shown on the submitted assignments page.
- * [Done] 3. Every submitted assignment will have the assignment title, assignment marks, examinee name, and a “give mark” button.
- * [Done] 4. By clicking on the give mark button it will open a modal or will navigate to a new page. And a user will be able to see the google drive link(pdf file) , note submitted by examinee. There will be a marks input field and a feedback input field and a submit button for giving marks.
- * [Done] 5. User is able to give a mark after clicking on the submit button.
- * [Done] 6. After marking an assignment the status of the assignment will be changed to completed.
+ * =========================
+ * [Done] 1. My assignment page(private page) - will have all assignments which are submitted by the specific user. For example, if you logged in you will only see your submitted assignment on the my assignment page
+ * [Done] 2. You can see assignment title, assignment status, assignment marks, your obtain marks, feedback(if you got the marks)
  * 
- * 
+
 
  */
 
@@ -17,16 +13,18 @@ import { useEffect, useState } from "react";
 import SubmittedAssignment from "../Components/SubmittedAssignment";
 import PageHeader from "../Layouts/PageHeader";
 import useAxios from "../Hooks/useAxios";
+import useAuth from "../Hooks/useAuth";
 
-const SubmittedAssignments = () => {
+const MySubmittedAssignments = () => {
+  const { user } = useAuth();
   const axios = useAxios();
-  const [submittedStatus, setSubmittedStatus] = useState("pending");
+  const [submittedStatus, setSubmittedStatus] = useState(null);
   const [submittedAssignments, setSubmittedAssignments] = useState([]);
 
   const loadSubmittedAssignment = async () => {
     try {
       const response = await axios.get(
-        `/submitted-assignments/?status=${submittedStatus}`
+        `/submitted-assignments/?status=${submittedStatus}&email=${user?.email}`
       );
 
       setSubmittedAssignments(response.data);
@@ -39,27 +37,31 @@ const SubmittedAssignments = () => {
 
   useEffect(() => {
     loadSubmittedAssignment();
-  }, [submittedStatus]);
+  }, [submittedStatus, user]);
 
   //
   const updateData = () => {
-    // const filter = submittedAssignments.filter(assignment => assignment._id === newData._id);
-    // const filteredAssignment = filter[0];
-    // const updateAssignment = {...filteredAssignment, ...newData}
-    // setSubmittedAssignments([...submittedAssignments])
     loadSubmittedAssignment();
   };
 
   return (
     <>
       <PageHeader
-        title="Submitted Assignments"
+        title="My Submitted Assignments"
         description="All the assignments submitted by the user"
       />
 
       <section>
         <div className="container-area space-y-12">
           <div className="flex gap-[1px] justify-center max-w-min mx-auto rounded-lg overflow-hidden min-w-min border bg-white border-gray-300">
+            <label
+              className={`btn rounded-none cursor-pointer ${
+                submittedStatus === null ? "bg-gray-800 text-white" : ""
+              }`}
+              onClick={() => setSubmittedStatus(null)}
+            >
+              All
+            </label>
             <label
               className={`btn rounded-none cursor-pointer ${
                 submittedStatus === "pending" ? "bg-gray-800 text-white" : ""
@@ -116,4 +118,4 @@ const SubmittedAssignments = () => {
   );
 };
 
-export default SubmittedAssignments;
+export default MySubmittedAssignments;

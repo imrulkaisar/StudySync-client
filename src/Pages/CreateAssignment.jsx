@@ -4,7 +4,7 @@
  * ====================
  * [Done] 1. Any logged in user is able to create an assignment for all users.
  * [Done] 2. An assignment will have a title, description, marks, thumbnail Image URL, assignment difficulty level(easy, medium, hard) [YOU MAY USE DROPDOWN SELECT INPUT FIELD], and due date [use this package for selecting date “https://www.npmjs.com/package/react-datepicker”]
- * 3. A success message will be shown when the assignment will be created successfully. [YOU MAY USE TOAST OF MODAL]
+ * [Done] 3. A success message will be shown when the assignment will be created successfully. [YOU MAY USE TOAST OF MODAL]
  * [Done] 4. While a user will create an assignment you have to store the user email with the assignment data [followed by Assignment creation requirement] . And then while a user will be trying to delete an assignment you will compare the current user email with the assignment creator email. And if it matches then the assignment will be deleted.
  * [Done] 5. [Bonus] Add validation in the create assignment form.
 
@@ -194,33 +194,45 @@ const CreateAssignment = () => {
                   showIcon
                   icon={<AiOutlineCalendar className="text-lg text-gray-400" />}
                   className="fom-input text-gray-600"
+                  minDate={new Date()}
+                  maxDate={new Date().setDate(new Date().getDate() + 30)}
                   selected={dueDate}
                   onChange={(date) => setDueDate(date)}
-                />
+                >
+                  <p className="text-red-600 text-sm text-center font-semibold">
+                    Max 30 days from today.
+                  </p>
+                </DatePicker>
               </div>
             </div>
             <div className="form-group col-span-2 flex flex-col lg:flex-row gap-4 items-center justify-end">
               <div className="">Difficulty Level:</div>
               <div className="flex gap-1 rounded-lg overflow-hidden min-w-min">
                 <label
-                  className={`btn bg-white rounded-none ${
-                    difficultyLabel === "easy" ? "bg-gray-600 text-white" : ""
+                  className={`btn rounded-none ${
+                    difficultyLabel === "easy"
+                      ? "bg-gray-800 text-white"
+                      : "bg-white"
                   }`}
                   onClick={() => setDifficultyLabel("easy")}
                 >
                   Easy
                 </label>
                 <label
-                  className={`btn bg-white rounded-none ${
-                    difficultyLabel === "medium" ? "bg-gray-600 text-white" : ""
+                  className={`btn rounded-none ${
+                    difficultyLabel === "medium"
+                      ? "bg-gray-800 text-white"
+                      : "bg-white"
                   }`}
                   onClick={() => setDifficultyLabel("medium")}
                 >
                   Medium
                 </label>
                 <label
-                  className={`btn bg-white rounded-none ${
-                    difficultyLabel === "hard" ? "bg-gray-600 text-white" : ""
+                  className={`btn rounded-none ${
+                    difficultyLabel === "hard"
+                      ? "bg-gray-800 text-white"
+                      : "bg-white"
                   }`}
                   onClick={() => setDifficultyLabel("hard")}
                 >

@@ -2,9 +2,9 @@
  *
  * Requirements:
  * ==============================
- * 1. Any user is able to update any assignment. [optional : it’s recommended to let the user update an assignment task who has created it. Follow hints of delete operation] 
- * 2. While a user will try to update an assignment the input fields of updated assignment form will be filled automatically with previous assignment data [automatically filled is optional . But you should try it ]. And users can change the input field data and can update with clicking on update assignment button.
- * 3. While the assignment is updated, show a success message and redirect the user to the all assignment page. [Redirecting is optional]
+ * [Done] 1. Any user is able to update any assignment. [optional : it’s recommended to let the user update an assignment task who has created it. Follow hints of delete operation] 
+ * [Done] 2. While a user will try to update an assignment the input fields of updated assignment form will be filled automatically with previous assignment data [automatically filled is optional . But you should try it ]. And users can change the input field data and can update with clicking on update assignment button.
+ * [Done] 3. While the assignment is updated, show a success message and redirect the user to the all assignment page. [Redirecting is optional]
  * 
  * 
 
@@ -13,7 +13,6 @@
 
 import { useEffect, useState } from "react";
 import PageHeader from "../Layouts/PageHeader";
-import useAuth from "../Hooks/useAuth";
 import DatePicker from "react-datepicker";
 import { AiOutlineCalendar } from "react-icons/ai";
 
@@ -225,9 +224,15 @@ const UpdateAssignment = () => {
                   showIcon
                   icon={<AiOutlineCalendar className="text-lg text-gray-400" />}
                   className="fom-input text-gray-600"
+                  minDate={new Date()}
+                  maxDate={new Date().setDate(new Date().getDate() + 30)}
                   selected={newDueDate}
                   onChange={(date) => setNewDueDate(date)}
-                />
+                >
+                  <p className="text-red-600 text-sm text-center font-semibold">
+                    Max 30 days from today.
+                  </p>
+                </DatePicker>
               </div>
             </div>
             <div className="form-group col-span-2 flex flex-col lg:flex-row gap-4 items-center justify-end">
@@ -235,7 +240,9 @@ const UpdateAssignment = () => {
               <div className="flex gap-1 rounded-lg overflow-hidden min-w-min">
                 <label
                   className={`btn rounded-none ${
-                    difficultyLabel === "easy" ? "bg-gray-800 text-white" : ""
+                    newDifficultyLabel === "easy"
+                      ? "bg-gray-800 text-white"
+                      : ""
                   }`}
                   onClick={() => setNewDifficultyLabel("easy")}
                 >
@@ -243,7 +250,9 @@ const UpdateAssignment = () => {
                 </label>
                 <label
                   className={`btn rounded-none ${
-                    difficultyLabel === "medium" ? "bg-gray-800 text-white" : ""
+                    newDifficultyLabel === "medium"
+                      ? "bg-gray-800 text-white"
+                      : ""
                   }`}
                   onClick={() => setNewDifficultyLabel("medium")}
                 >
@@ -251,7 +260,9 @@ const UpdateAssignment = () => {
                 </label>
                 <label
                   className={`btn rounded-none ${
-                    difficultyLabel === "hard" ? "bg-gray-800 text-white" : ""
+                    newDifficultyLabel === "hard"
+                      ? "bg-gray-800 text-white"
+                      : ""
                   }`}
                   onClick={() => setNewDifficultyLabel("hard")}
                 >

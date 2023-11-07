@@ -42,7 +42,7 @@ const SocialLogin = () => {
   return (
     <div className="flex gap-5 items-center justify-center">
       <p>Login with</p>
-      <div className="flex gap-2 items-center justify-center">
+      <div className="flex gap-4 items-center justify-center">
         <button onClick={() => socialLogin(googleLogin)}>
           <FcGoogle className="text-xl" />
         </button>

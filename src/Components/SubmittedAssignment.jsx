@@ -176,6 +176,16 @@ const SubmittedAssignment = ({ data, updateData }) => {
           )}
         </td>
       </tr>
+      {data?.feedback ? (
+        <tr>
+          <td className="px-5 py-3 text-center bg-gray-300" colSpan="5">
+            <b>Feedback: </b>
+            {data?.feedback}
+          </td>
+        </tr>
+      ) : (
+        ""
+      )}
     </>
   );
 };
