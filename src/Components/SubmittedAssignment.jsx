@@ -66,7 +66,9 @@ const SubmittedAssignment = ({ data, updateData }) => {
           {data?.givenMarks ? data?.givenMarks + "/" : ""}
           {assignment && assignment?.marks}
         </td>
-        <td className="px-6 py-7">{examinee && examinee?.name}</td>
+        <td className="px-6 py-7 whitespace-nowrap">
+          {examinee && examinee?.name}
+        </td>
         <td className="px-6 py-7">
           <span className="border-2 border-secondaryShadow px-3 py-1 rounded-md capitalize">
             {status}
@@ -76,7 +78,7 @@ const SubmittedAssignment = ({ data, updateData }) => {
           {status === "pending" ? (
             <Popup
               trigger={(open) => (
-                <button className="btn btn-primary text-sm px-4">
+                <button className="btn btn-primary text-sm px-4 whitespace-nowrap">
                   Give Mark
                 </button>
               )}
@@ -169,7 +171,7 @@ const SubmittedAssignment = ({ data, updateData }) => {
               </div>
             </Popup>
           ) : (
-            <span className="text-sm text-green-600">
+            <span className="text-sm text-green-600 whitespace-nowrap">
               Completed by <br />
               {data?.examiner?.name}
             </span>
@@ -178,7 +180,7 @@ const SubmittedAssignment = ({ data, updateData }) => {
       </tr>
       {data?.feedback ? (
         <tr>
-          <td className="px-5 py-3 text-center bg-gray-300" colSpan="5">
+          <td className="px-5 py-3 bg-gray-300" colSpan="5">
             <b>Feedback: </b>
             {data?.feedback}
           </td>

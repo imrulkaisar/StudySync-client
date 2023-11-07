@@ -65,15 +65,19 @@ const Header = () => {
               </Link>
             ) : (
               <div className="group flex gap-3 items-end">
-                <img
-                  className="w-10 aspect-square object-cover rounded-full border-2 p-[2px]"
-                  src={user.photoURL}
-                  alt=""
-                />
+                <Link to="/my-assignments">
+                  <img
+                    className="w-10 aspect-square object-cover rounded-full border-2 p-[2px]"
+                    src={user.photoURL}
+                    alt=""
+                  />
+                </Link>
                 <div className="">
-                  <p className="text-black capitalize text-sm">
-                    {user.displayName}
-                  </p>
+                  <Link to="/my-assignments">
+                    <p className="text-black capitalize text-sm">
+                      {user.displayName}
+                    </p>
+                  </Link>
                   <button
                     onClick={handleLogOut}
                     className="py-1 px-4 border text-xs leading-none border-gray-400 group-hover:text-white group-hover:bg-gray-900 group-hover:border-gray-900 group-hover:rounded-md"
@@ -90,9 +94,19 @@ const Header = () => {
         <div className="mobile-menu flex lg:hidden justify-between gap-4 items-center">
           <Logo className="text-3xl" logoClass="w-5" />
           <div className="flex gap-4 items-center">
-            <Link className="btn btn-primary px-5 py-1" to="/login">
-              Login
-            </Link>
+            {!user ? (
+              <Link className="btn btn-primary px-5 py-1" to="/login">
+                Login
+              </Link>
+            ) : (
+              <Link to="/my-assignments">
+                <img
+                  className="w-10 aspect-square object-cover rounded-full border-2 p-[2px]"
+                  src={user.photoURL}
+                  alt=""
+                />
+              </Link>
+            )}
             <div>
               <div
                 onClick={toggleDrawer}
