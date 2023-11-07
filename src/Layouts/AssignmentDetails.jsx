@@ -13,11 +13,12 @@
 import Popup from "reactjs-popup";
 import PageHeader from "./PageHeader";
 import { BiTrash } from "react-icons/bi";
+import { AiOutlineWarning } from "react-icons/ai";
 
 import "reactjs-popup/dist/index.css";
 import { useEffect, useState } from "react";
 import useAuth from "../Hooks/useAuth";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useAxios from "../Hooks/useAxios";
 import useToast from "../Hooks/useToast";
 import Swal from "sweetalert2";
@@ -76,6 +77,10 @@ const AssignmentDetails = () => {
 
       if (response.data.insertedId) {
         showToast("success", "Assignment added successfully!");
+
+        navigate("/submitted-assignments");
+        // setTimeout(() => {
+        // }, 2000);
       }
     } catch (error) {
       console.error(error);
@@ -92,7 +97,7 @@ const AssignmentDetails = () => {
     }
   };
 
-  // console.log(assignment);
+  console.log(assignment);
 
   useEffect(() => {
     loadAssignment();
@@ -157,12 +162,12 @@ const AssignmentDetails = () => {
               {author && (
                 <div>
                   <img
-                    src={author.image}
-                    alt={author.name}
+                    src={author?.image}
+                    alt={author?.name}
                     className="inline w-16 aspect-square rounded-full p-1 border border-gray-300"
                   />
                   <h5 className="font-semibold">{author.name}</h5>
-                  <p className="text-xs">{author.email}</p>
+                  <p className="text-xs">{author?.email}</p>
                 </div>
               )}
             </div>
@@ -186,45 +191,73 @@ const AssignmentDetails = () => {
                 borderRadius: "10px",
               }}
             >
-              <div className="p-8 min-h-[300px] rounded-lg space-y-8">
-                <h4 className="text-center text-3xl font-semibold capitalize">
-                  Submit your assignment
-                </h4>
-                <form className="space-y-5" onSubmit={handleAssignmentSubmit}>
-                  <div className="form-group col-span-3">
-                    <label className="sr-only" htmlFor="title">
-                      PDF link of your assignment
-                    </label>
-                    <input
-                      className="form-input bg-gray-100"
-                      type="text"
-                      name="title"
-                      id="title"
-                      placeholder="PDF link of your assignment"
-                      onChange={(e) => setPdfLink(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="form-group col-span-3">
-                    <label className="sr-only" htmlFor="description">
-                      Your Note
-                    </label>
-                    <textarea
-                      className="form-input min-h-[150px] bg-gray-100"
-                      name="description"
-                      id="description"
-                      placeholder="Your Note"
-                      onChange={(e) => setNote(e.target.value)}
-                      required
-                    ></textarea>
-                  </div>
-                  <div className="text-center">
-                    <button type="submit" className="btn btn-primary mx-auto">
-                      Submit
-                    </button>
-                  </div>
-                </form>
-              </div>
+              {user ? (
+                <div className="p-8 min-h-min rounded-lg">
+                  {author?.email === user?.email ? (
+                    <div className="text-center space-y-5">
+                      <AiOutlineWarning className="inline text-6xl text-red-600" />
+                      <h4 className="text-3xl font-semibold capitalize">
+                        You can't take your own assignment.
+                      </h4>
+                      <p>Please try different one.</p>
+                      <Link
+                        to="/assignments"
+                        className="btn btn-primary inline-block"
+                      >
+                        All Assignments
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="space-y-5">
+                      <h4 className="text-center text-3xl font-semibold capitalize">
+                        Submit your assignment
+                      </h4>
+                      <form
+                        className="space-y-5"
+                        onSubmit={handleAssignmentSubmit}
+                      >
+                        <div className="form-group col-span-3">
+                          <label className="sr-only" htmlFor="title">
+                            PDF link of your assignment
+                          </label>
+                          <input
+                            className="form-input bg-gray-100"
+                            type="text"
+                            name="title"
+                            id="title"
+                            placeholder="PDF link of your assignment"
+                            onChange={(e) => setPdfLink(e.target.value)}
+                            required
+                          />
+                        </div>
+                        <div className="form-group col-span-3">
+                          <label className="sr-only" htmlFor="description">
+                            Your Note
+                          </label>
+                          <textarea
+                            className="form-input min-h-[150px] bg-gray-100"
+                            name="description"
+                            id="description"
+                            placeholder="Your Note"
+                            onChange={(e) => setNote(e.target.value)}
+                            required
+                          ></textarea>
+                        </div>
+                        <div className="text-center">
+                          <button
+                            type="submit"
+                            className="btn btn-primary mx-auto"
+                          >
+                            Submit
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <p>Loading ...</p>
+              )}
             </Popup>
 
             <button

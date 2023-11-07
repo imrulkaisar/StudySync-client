@@ -25,7 +25,9 @@ const SubmittedAssignments = () => {
 
   const loadSubmittedAssignment = async () => {
     try {
-      const response = await axios.get("/submitted-assignments");
+      const response = await axios.get(
+        `/submitted-assignments/?status=${submittedStatus}`
+      );
 
       setSubmittedAssignments(response.data);
 
@@ -37,7 +39,16 @@ const SubmittedAssignments = () => {
 
   useEffect(() => {
     loadSubmittedAssignment();
-  }, []);
+  }, [submittedStatus]);
+
+  //
+  const updateData = () => {
+    // const filter = submittedAssignments.filter(assignment => assignment._id === newData._id);
+    // const filteredAssignment = filter[0];
+    // const updateAssignment = {...filteredAssignment, ...newData}
+    // setSubmittedAssignments([...submittedAssignments])
+    loadSubmittedAssignment();
+  };
 
   return (
     <>
@@ -59,9 +70,9 @@ const SubmittedAssignments = () => {
             </label>
             <label
               className={`btn rounded-none cursor-pointer ${
-                submittedStatus === "completed" ? "bg-gray-800 text-white" : ""
+                submittedStatus === "complete" ? "bg-gray-800 text-white" : ""
               }`}
-              onClick={() => setSubmittedStatus("completed")}
+              onClick={() => setSubmittedStatus("complete")}
             >
               Completed
             </label>
@@ -90,7 +101,11 @@ const SubmittedAssignments = () => {
               </thead>
               <tbody className="text-base odd:bg-gray-300 even:bg-white">
                 {submittedAssignments.map((assignment) => (
-                  <SubmittedAssignment key={assignment._id} data={assignment} />
+                  <SubmittedAssignment
+                    key={assignment._id}
+                    data={assignment}
+                    updateData={updateData}
+                  />
                 ))}
               </tbody>
             </table>
