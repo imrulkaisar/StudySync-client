@@ -31,7 +31,7 @@
       "title": "Responsive Web Design",
       "description": "Design a responsive website layout using HTML and CSS. Create a navigation bar, header, content sections, and footer. Implement a grid-based layout using CSS frameworks or custom media queries. Optimize the design for different screen sizes and devices. Test the website on various browsers and devices to ensure consistent functionality and appearance.",
       "marks": 80,
-      "thumbnail": "https://example.com/responsive_thumbnail.jpg",
+      "thumbnail": "https://tinyurl.com/2p87bvpp",
       "difficultyLevel": "hard",
       "dueDate": "2023-11-13"
   },
@@ -40,7 +40,7 @@
       "title": "Simple Python Program",
       "description": "Write a simple Python program that performs basic operations such as addition, subtraction, multiplication, and division. Implement error handling to manage exceptions and input validation. Use appropriate data structures and control structures to organize the code effectively. Test the program with different inputs to ensure its reliability and accuracy.",
       "marks": 90,
-      "thumbnail": "https://example.com/python_thumbnail.jpg",
+      "thumbnail": "https://tinyurl.com/yw3yjv65",
       "difficultyLevel": "easy",
       "dueDate": "2023-11-14"
   },
@@ -49,7 +49,7 @@
       "title": "Database Management System",
       "description": "Design a small database management system using SQL. Create tables for storing different types of data and establish appropriate relationships between tables. Implement SQL queries for data retrieval, insertion, and deletion. Optimize the database structure for efficient data management and query performance. Test the database system with various scenarios to ensure its functionality and data integrity.",
       "marks": 100,
-      "thumbnail": "https://example.com/database_thumbnail.jpg",
+      "thumbnail": "https://tinyurl.com/2av88zbc",
       "difficultyLevel": "hard",
       "dueDate": "2023-11-15"
   },
@@ -58,7 +58,7 @@
       "title": "Object-Oriented Programming in Java",
       "description": "Implement a Java program using object-oriented principles. Create classes with appropriate attributes and methods, and establish inheritance and polymorphism relationships between classes. Implement exception handling and encapsulation to ensure data security and code reliability. Test the program with different test cases to validate its functionality and robustness.",
       "marks": 80,
-      "thumbnail": "https://example.com/java_thumbnail.jpg",
+      "thumbnail": "https://tinyurl.com/29z4pz27",
       "difficultyLevel": "medium",
       "dueDate": "2023-11-16"
   },
@@ -67,7 +67,7 @@
       "title": "Data Structures and Algorithms",
       "description": "Implement various data structures such as arrays, linked lists, stacks, and queues in a programming language of your choice. Demonstrate the usage of these data structures with appropriate algorithms for sorting, searching, and manipulation. Analyze the time and space complexities of the algorithms used and compare their performance under different input scenarios.",
       "marks": 90,
-      "thumbnail": "https://example.com/dsa_thumbnail.jpg",
+      "thumbnail": "https://tinyurl.com/y2u4n7sm",
       "difficultyLevel": "hard",
       "dueDate": "2023-11-17"
   },

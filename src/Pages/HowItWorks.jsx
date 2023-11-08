@@ -23,6 +23,10 @@ const HowItWorks = () => {
           </div>
         </div>
       </section>
+
+      <section>
+        <div className="container-area"></div>
+      </section>
     </div>
   );
 };

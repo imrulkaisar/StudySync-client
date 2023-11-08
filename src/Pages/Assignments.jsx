@@ -20,8 +20,8 @@ const Assignments = () => {
   const [assignments, setAssignments] = useState([]);
 
   const [difficultyLabel, setDifficultyLabel] = useState(null);
-  const [totalAssignments, setTotalAssignments] = useState(48);
-  const [itemPerPage, setItemPerPage] = useState(8);
+  const [totalAssignments, setTotalAssignments] = useState(0);
+  const [itemPerPage, setItemPerPage] = useState(4);
   const [currentPage, setCurrentPage] = useState(0);
   const pageNumber = Math.ceil(totalAssignments / itemPerPage);
 
@@ -35,10 +35,24 @@ const Assignments = () => {
   const loadAssignment = async () => {
     try {
       const response = await axios.get(
-        `/assignments/?difficultyLabel=${difficultyLabel}`
+        `/assignments/?difficultyLabel=${
+          difficultyLabel || "null"
+        }&page=${currentPage}&size=${itemPerPage}`
       );
 
       setAssignments(response.data);
+
+      // console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const totalCount = async () => {
+    try {
+      const response = await axios.get(`/assignments/count`);
+
+      setTotalAssignments(response.data.count);
 
       console.log(response.data);
     } catch (error) {
@@ -48,9 +62,13 @@ const Assignments = () => {
 
   useEffect(() => {
     loadAssignment();
-  }, [difficultyLabel]);
+  }, [difficultyLabel, currentPage, itemPerPage]);
 
-  // console.log(pages);
+  useEffect(() => {
+    totalCount();
+  }, []);
+
+  // console.log(itemPerPage, currentPage);
 
   return (
     <>
@@ -131,7 +149,7 @@ const Assignments = () => {
                   key={index}
                   onClick={() => setCurrentPage(index)}
                 >
-                  {index}
+                  {index + 1}
                 </button>
               ))}
             </div>
