@@ -3,9 +3,11 @@ import { BsGithub } from "react-icons/bs";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAxios from "../Hooks/useAxios";
 
 const SocialLogin = () => {
   const { googleLogin, githubLogin } = useAuth();
+  const axios = useAxios();
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -16,15 +18,22 @@ const SocialLogin = () => {
     media()
       .then((res) => {
         if (res.user) {
-          Swal.fire({
-            icon: "success",
-            title: "You are logged in!",
-            showConfirmButton: false,
-            showCloseButton: true,
-          });
-        }
+          (async () => {
+            const userEmail = { email: res.user.email };
 
-        navigate(pathname + search);
+            const tokenRes = await axios.post("/jwt", userEmail);
+
+            if (tokenRes.data) {
+              Swal.fire({
+                icon: "success",
+                title: "You are logged in!",
+                showConfirmButton: false,
+                showCloseButton: true,
+              });
+              navigate(pathname + search);
+            }
+          })();
+        }
       })
       .catch((error) => {
         console.error(error);

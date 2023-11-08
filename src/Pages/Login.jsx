@@ -14,9 +14,11 @@ import SocialLogin from "../Components/SocialLogin";
 import { useState } from "react";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxios from "../Hooks/useAxios";
 
 const Login = () => {
   const { login } = useAuth();
+  const axios = useAxios();
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -33,15 +35,23 @@ const Login = () => {
       const res = await login(email, password);
 
       if (res.user) {
-        Swal.fire({
-          icon: "success",
-          title: "Welcome back!",
-          showConfirmButton: false,
-          showCloseButton: true,
-        });
-      }
+        const userEmail = { email: res.user.email };
 
-      navigate(pathname + search);
+        const tokenRes = await axios.post("/jwt", userEmail);
+
+        if (tokenRes.data) {
+          Swal.fire({
+            icon: "success",
+            title: "Welcome back!",
+            showConfirmButton: false,
+            showCloseButton: true,
+          });
+        }
+
+        console.log(tokenRes.data);
+
+        navigate(pathname + search);
+      }
     } catch (error) {
       console.error(error);
 

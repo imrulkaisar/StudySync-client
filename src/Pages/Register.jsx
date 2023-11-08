@@ -13,10 +13,12 @@ import SocialLogin from "../Components/SocialLogin";
 import { useState } from "react";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxios from "../Hooks/useAxios";
 
 const Register = () => {
   const { createUser, updateUser } = useAuth();
   const navigate = useNavigate();
+  const axios = useAxios();
 
   const [displayName, setDisplayName] = useState("");
   const [photoURL, setPhotoURL] = useState("");
@@ -81,14 +83,20 @@ const Register = () => {
         //   })
         //   .catch((error) => console.error(error));
 
-        Swal.fire({
-          icon: "success",
-          title: "User created successfully!",
-          showConfirmButton: false,
-          showCloseButton: true,
-        });
+        const userEmail = { email: res.user.email };
 
-        navigate("/");
+        const tokenRes = await axios.post("/jwt", userEmail);
+
+        if (tokenRes.data) {
+          Swal.fire({
+            icon: "success",
+            title: "User created successfully!",
+            showConfirmButton: false,
+            showCloseButton: true,
+          });
+
+          navigate("/");
+        }
       } catch (error) {
         console.error(error);
       }
