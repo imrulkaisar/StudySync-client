@@ -49,3 +49,6 @@
 #main-menu .active {
   @apply text-secondary;
 }
+.popup-content {
+  min-width: 320px;
+}
