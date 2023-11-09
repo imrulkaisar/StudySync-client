@@ -49,7 +49,7 @@ const MySubmittedAssignments = () => {
     loadSubmittedAssignment();
   };
 
-  console.log(submittedAssignments);
+  // console.log(submittedAssignments);
 
   return (
     <>
@@ -92,13 +92,13 @@ const MySubmittedAssignments = () => {
               <table className="w-full text-sm text-left text-gray-600">
                 <thead className="text-sm text-white uppercase bg-gray-800 border-gray-700">
                   <tr>
-                    <th scope="col" className="px-6 py-7">
+                    <th scope="col" className="px-6 py-7 whitespace-nowrap">
                       Assignment Title
                     </th>
                     <th scope="col" className="px-6 py-7">
                       Mark
                     </th>
-                    <th scope="col" className="px-6 py-7">
+                    <th scope="col" className="px-6 py-7 whitespace-nowrap">
                       Examinee name
                     </th>
                     <th scope="col" className="px-6 py-7">
