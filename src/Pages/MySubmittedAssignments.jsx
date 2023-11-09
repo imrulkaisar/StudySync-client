@@ -14,6 +14,7 @@ import SubmittedAssignment from "../Components/SubmittedAssignment";
 import PageHeader from "../Layouts/PageHeader";
 import useAxios from "../Hooks/useAxios";
 import useAuth from "../Hooks/useAuth";
+import TableSkeleton from "../Components/skeletons/TableSkeleton";
 
 const MySubmittedAssignments = () => {
   const { user } = useAuth();
@@ -27,7 +28,11 @@ const MySubmittedAssignments = () => {
         `/submitted-assignments/?status=${submittedStatus}&email=${user?.email}`
       );
 
-      setSubmittedAssignments(response.data);
+      setSubmittedAssignments([]);
+
+      setTimeout(() => {
+        setSubmittedAssignments(response.data);
+      }, 1000);
 
       // console.log(response.data);
     } catch (error) {
@@ -43,6 +48,8 @@ const MySubmittedAssignments = () => {
   const updateData = () => {
     loadSubmittedAssignment();
   };
+
+  console.log(submittedAssignments);
 
   return (
     <>
@@ -80,38 +87,42 @@ const MySubmittedAssignments = () => {
             </label>
           </div>
 
-          <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table className="w-full text-sm text-left text-gray-600">
-              <thead className="text-sm text-white uppercase bg-gray-800 border-gray-700">
-                <tr>
-                  <th scope="col" className="px-6 py-7">
-                    Assignment Title
-                  </th>
-                  <th scope="col" className="px-6 py-7">
-                    Mark
-                  </th>
-                  <th scope="col" className="px-6 py-7">
-                    Examinee name
-                  </th>
-                  <th scope="col" className="px-6 py-7">
-                    Status
-                  </th>
-                  <th scope="col" className="px-6 py-7">
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-base odd:bg-gray-300 even:bg-white">
-                {submittedAssignments.map((assignment) => (
-                  <SubmittedAssignment
-                    key={assignment._id}
-                    data={assignment}
-                    updateData={updateData}
-                  />
-                ))}
-              </tbody>
-            </table>
-          </div>
+          {submittedAssignments.length > 0 ? (
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+              <table className="w-full text-sm text-left text-gray-600">
+                <thead className="text-sm text-white uppercase bg-gray-800 border-gray-700">
+                  <tr>
+                    <th scope="col" className="px-6 py-7">
+                      Assignment Title
+                    </th>
+                    <th scope="col" className="px-6 py-7">
+                      Mark
+                    </th>
+                    <th scope="col" className="px-6 py-7">
+                      Examinee name
+                    </th>
+                    <th scope="col" className="px-6 py-7">
+                      Status
+                    </th>
+                    <th scope="col" className="px-6 py-7">
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="text-base odd:bg-gray-300 even:bg-white">
+                  {submittedAssignments.map((assignment) => (
+                    <SubmittedAssignment
+                      key={assignment._id}
+                      data={assignment}
+                      updateData={updateData}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <TableSkeleton />
+          )}
         </div>
       </section>
     </>

@@ -46,9 +46,9 @@ const AssignmentCard = ({ data }) => {
   };
   return (
     <article className="md:flex rounded-lg overflow-hidden w-full relative bg-gray-50 items-stretch">
-      <Link to={detailsLink} className="h-full w-full md:w-56">
+      <Link to={detailsLink} className="md:h-full w-full md:w-56">
         <img
-          className="w-full md:w-56 h-full aspect-video object-cover"
+          className="w-full md:w-56 md:h-full aspect-video object-cover"
           src={thumbnail}
           alt=""
         />

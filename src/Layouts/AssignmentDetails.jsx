@@ -22,6 +22,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import useAxios from "../Hooks/useAxios";
 import useToast from "../Hooks/useToast";
 import Swal from "sweetalert2";
+import AssignmentCardSkeleton from "../Components/skeletons/AssignmentCardSkeleton";
+import AssignmentDetailsSkeleton from "../Components/skeletons/AssignmentDetailsSkeleton";
 
 const AssignmentDetails = () => {
   const { user } = useAuth();
@@ -30,7 +32,7 @@ const AssignmentDetails = () => {
   const { showToast } = useToast();
   const navigate = useNavigate();
 
-  const [assignment, setAssignment] = useState({});
+  const [assignment, setAssignment] = useState(null);
   const [pdfLink, setPdfLink] = useState("");
   const [note, setNote] = useState("");
 
@@ -91,13 +93,15 @@ const AssignmentDetails = () => {
     try {
       const response = await axios.get(`/assignments/${id}`);
 
-      setAssignment(response.data[0]);
+      setTimeout(() => {
+        setAssignment(response.data[0]);
+      }, 2000);
     } catch (error) {
       console.error(error);
     }
   };
 
-  console.log(assignment);
+  // console.log(assignment);
 
   useEffect(() => {
     loadAssignment();
@@ -147,6 +151,10 @@ const AssignmentDetails = () => {
       console.error(error);
     }
   };
+
+  if (!assignment) {
+    return <AssignmentDetailsSkeleton />;
+  }
 
   return (
     <>

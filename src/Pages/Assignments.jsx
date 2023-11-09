@@ -14,6 +14,7 @@ import AssignmentCard from "../Components/AssignmentCard";
 import PageHeader from "../Layouts/PageHeader";
 import useAxios from "../Hooks/useAxios";
 import { useEffect } from "react";
+import AssignmentCardSkeleton from "../Components/skeletons/AssignmentCardSkeleton";
 
 const Assignments = () => {
   const axios = useAxios();
@@ -40,7 +41,11 @@ const Assignments = () => {
         }&page=${currentPage}&size=${itemPerPage}`
       );
 
-      setAssignments(response.data);
+      setAssignments([]);
+
+      setTimeout(() => {
+        setAssignments(response.data);
+      }, 1000);
 
       // console.log(response.data);
     } catch (error) {
@@ -132,9 +137,12 @@ const Assignments = () => {
                 <AssignmentCard key={assignment._id} data={assignment} />
               ))
             ) : (
-              <p className="text-center text-5xl col-span-2 py-16 text-gray-400">
-                No data found...
-              </p>
+              <>
+                <AssignmentCardSkeleton />
+                <AssignmentCardSkeleton />
+                <AssignmentCardSkeleton />
+                <AssignmentCardSkeleton />
+              </>
             )}
           </div>
 
