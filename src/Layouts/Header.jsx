@@ -17,28 +17,36 @@ import Drawer from "react-modern-drawer";
 //import styles 👇
 import "react-modern-drawer/dist/index.css";
 import useAuth from "../Hooks/useAuth";
+import useAxios from "../Hooks/useAxios";
+import useToast from "../Hooks/useToast";
 
 const Header = () => {
   const { user, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const axios = useAxios();
+  const { showToast } = useToast;
 
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  const handleLogOut = () => {
-    logout()
-      .then((res) => {
-        console.log(res);
-        if (res) {
-          console.log("Logged out.");
-          navigate("/login");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  const handleLogOut = async () => {
+    try {
+      await logout();
+      console.log("Logged out.");
+
+      const response = await axios.get("/logout");
+
+      if (response.data) {
+        showToast("success", response.data.message);
+      }
+
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+      showToast("error", "Logout failed");
+    }
   };
 
   return (
