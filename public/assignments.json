@@ -76,7 +76,7 @@
       "title": "PHP Web Development",
       "description": "Build a dynamic website using PHP. Implement server-side scripting to create dynamic web pages and interact with a database. Use PHP frameworks or libraries for efficient code management and security. Apply best practices for handling user inputs and data, and implement data validation and sanitization techniques. Test the website thoroughly to ensure its functionality and security.",
       "marks": 70,
-      "thumbnail": "https://example.com/php_thumbnail.jpg",
+      "thumbnail": "https://tinyurl.com/3nsfzd9y",
       "difficultyLevel": "medium",
       "dueDate": "2023-11-18"
   },
@@ -85,7 +85,7 @@
       "title": "Introduction to C Programming",
       "description": "Write a simple C program that demonstrates basic concepts such as variables, loops, conditional statements, and functions. Implement error handling and memory management techniques to ensure the program's stability and efficiency. Follow C programming standards and coding conventions to maintain code readability and understandability.",
       "marks": 60,
-      "thumbnail": "https://example.com/c_thumbnail.jpg",
+      "thumbnail": "https://tinyurl.com/bdfrddps",
       "difficultyLevel": "easy",
       "dueDate": "2023-11-19"
   },
@@ -94,7 +94,7 @@
       "title": "User Interface Design",
       "description": "Design a user-friendly interface for a mobile application or a website. Create wireframes and prototypes to visualize the layout and user interactions. Incorporate principles of usability and accessibility to enhance the user experience. Conduct user testing to gather feedback and iterate on the design to improve its functionality and user satisfaction.",
       "marks": 80,
-      "thumbnail": "https://example.com/ui_thumbnail.jpg",
+      "thumbnail": "https://tinyurl.com/bddsvsdf",
       "difficultyLevel": "medium",
       "dueDate": "2023-11-20"
   },
